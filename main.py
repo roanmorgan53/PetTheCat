@@ -15,7 +15,6 @@ for i in range(46):
     numString += str(i)
     catFiles.append("venv/assets/sprites/just-a-few-cats-v1.1.0/sprites/tile0" + numString + ".png")
 
-print(catFiles)
 
 pg.display.set_caption("PET THE CAT!")
 screenSize = (750, 750)
@@ -44,7 +43,19 @@ for frame in range(image.n_frames):
     gameImage = pg.transform.scale(gameImage, (64,64))
     frames.append(gameImage)
 
-catType = 34
+# process the cat icon gif
+catIconFrames = []
+catIconFrameTracker = 0
+catIconImage = Image.open("venv/assets/images/catIcon.gif")
+for frame in range(catIconImage.n_frames):
+    catIconImage.seek(frame)
+    catGifSize = catIconImage.size
+    catGifData = catIconImage.tobytes()
+    catGifImage = pg.image.fromstring(catGifData, catGifSize, catIconImage.mode)
+    catGameImage = pg.transform.scale(catGifImage, (480,480))
+    catIconFrames.append(catGameImage)
+
+catType = 0
 
 # initialize the mouse info
 pg.mouse.set_visible(False)
@@ -54,29 +65,62 @@ mouseImgRect = mouseImg.get_rect()
 window.fill(color)
 
 cat = pygame.image.load(catFiles[catType])
-cat = pygame.transform.scale(cat, (64,64))
+cat = pygame.transform.scale(cat, (64*2,64*2))
 catRect = cat.get_rect()
 
-while (True):
+
+# setup the exit button
+exitButtonPath = "venv/assets/images/exitButton.png"
+exitButton = pygame.image.load(exitButtonPath)
+exitButtonRect = exitButton.get_rect()
+exitButtonResize = pygame.transform.scale(exitButton, (350*.5, 150*.5))
+exitButtonResizeRect = exitButtonResize.get_rect()
+
+while True:
     pg.event.get()
 
+    # reset the frame tracker
     if frameTracker == image.n_frames:
         frameTracker = 1
 
+    if catIconFrameTracker == catIconImage.n_frames:
+        catIconFrameTracker = 1
+
+    # set the icon
+    pg.display.set_icon(catIconFrames[catIconFrameTracker])
+
+    # cycle through different cats every 30 iterations
     if clicks == 30:
         if catType == 45:
             catType = 0
         else:
             catType += 1
 
+    # display block
     catRect.center = window.get_rect().center
     window.blit(cat, catRect)
+    window.blit(exitButtonResize, (550,25))
     mouseImgRect.center = pygame.mouse.get_pos()
     framesRect = frames[frameTracker].get_rect()
     framesRect.center = pg.mouse.get_pos()
-
     window.blit(frames[frameTracker], framesRect)
+
     frameTracker += 1
+
+    # search for mouse collision with exit button
+    ev = pygame.event.get()
+    for event in ev:
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            pos = pygame.mouse.get_pos()
+            if exitButton.get_rect().collidepoint(pos):
+                pygame.exit()
+
+
+
+
+    if frameTracker % 2 == 0:
+        catIconFrameTracker += 1
 
     clock.tick(25)
 
