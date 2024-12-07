@@ -9,11 +9,13 @@
 script = ExtResource("1_7ot4l")
 
 [node name="PetCounter" parent="." instance=ExtResource("2_sl8an")]
-position = Vector2(79, -96)
+position = Vector2(78, -98)
 
 [node name="Background" parent="." instance=ExtResource("3_qwdc6")]
 position = Vector2(1, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 
 [node name="Cat" parent="." instance=ExtResource("1_2a1bc")]
+visible = false

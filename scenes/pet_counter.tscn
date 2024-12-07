@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bidlg6sqlxucg"]
+
+[ext_resource type="Script" path="res://scripts/pet_counter.gd" id="1_ohrw6"]
+[ext_resource type="FontFile" uid="uid://idimbd7qwu0i" path="res://assets/Font/m5x7.ttf" id="2_8voov"]
+
+[node name="PetCounter" type="Node2D"]
+script = ExtResource("1_ohrw6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_fonts/normal_font = ExtResource("2_8voov")
+bbcode_enabled = true
+text = "[hint=\"amount of pets\"]30[/hint]"

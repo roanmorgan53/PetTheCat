@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c85bwi57ck8bn"]
+
+[ext_resource type="Texture2D" uid="uid://dnvlrj57ojkjd" path="res://assets/images/ptc_backgroundbig.png" id="1_d00es"]
+
+[node name="Background" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+offset_left = -101.0
+offset_top = -100.0
+offset_right = 106.0
+offset_bottom = 101.0
+texture = ExtResource("1_d00es")
+expand_mode = 1
+stretch_mode = 4

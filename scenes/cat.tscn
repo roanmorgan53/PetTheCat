@@ -353,7 +353,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8twp"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l132j"]
 
 [node name="Cat" type="CharacterBody2D"]
 script = ExtResource("1_b10n0")
@@ -361,9 +361,7 @@ script = ExtResource("1_b10n0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_k3jyr")
 animation = &"lick"
-frame_progress = 0.927887
+frame_progress = 0.673401
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_u8twp")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_l132j")
